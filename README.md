@@ -1,15 +1,23 @@
-MERN Stack Deployment on AWS using Terraform and Ansible
-Project Overview
+# MERN Stack Deployment on AWS using Terraform and Ansible
 
-This project demonstrates the deployment of a MERN (MongoDB, Express.js, React.js, Node.js) application on AWS using Infrastructure as Code (IaC) with Terraform and Configuration Management with Ansible.
+## Project Overview
 
-The objective of this project is to automate the provisioning of AWS infrastructure and the deployment of a MERN application while following security best practices.
+This project demonstrates the deployment of a MERN (MongoDB, Express.js, React.js, Node.js) application on AWS using Infrastructure as Code (IaC) with Terraform and Configuration Management using Ansible.
 
-Application Used:
+The goal of this project is to automate the provisioning of AWS infrastructure and the deployment of a MERN application while following security best practices.
 
-TravelMemory Application
-Repository: https://github.com/UnpredictablePrashant/TravelMemory
-Architecture
+## Application Used
+
+TravelMemory MERN Application
+
+Repository:
+https://github.com/UnpredictablePrashant/TravelMemory
+
+---
+
+# Architecture
+
+```text
 Internet
     │
     ▼
@@ -19,42 +27,54 @@ Internet Gateway
 Public Subnet
     │
     ▼
-Web Server (EC2)
-React Frontend
-Node.js Backend
+Web Server EC2 Instance
+(React Frontend + Node.js Backend)
     │
     ▼
 Private Subnet
     │
     ▼
-MongoDB Server (EC2)
-Components
-Component	Purpose
-VPC	Isolated AWS Network
-Public Subnet	Hosts Web Server
-Private Subnet	Hosts MongoDB Server
-Internet Gateway	Internet Access
-NAT Gateway	Internet Access for Private Subnet
-EC2 Web Server	Hosts React and Node.js
-EC2 Database Server	Hosts MongoDB
-Security Groups	Network Security
-Terraform	Infrastructure Provisioning
-Ansible	Configuration Management
-Technologies Used
-AWS EC2
-AWS VPC
-AWS Internet Gateway
-AWS NAT Gateway
-AWS IAM
-Terraform
-Ansible
-MongoDB
-Node.js
-Express.js
-React.js
-Git
-GitHub
-Project Structure
+MongoDB EC2 Instance
+```
+
+## Components Used
+
+| Component | Purpose |
+|------------|----------|
+| AWS VPC | Private network for infrastructure |
+| Public Subnet | Hosts Web Server |
+| Private Subnet | Hosts Database Server |
+| Internet Gateway | Internet access for public subnet |
+| NAT Gateway | Internet access for private subnet |
+| EC2 Web Server | Hosts React and Node.js |
+| EC2 Database Server | Hosts MongoDB |
+| Security Groups | Firewall and network security |
+| IAM Roles | AWS permissions management |
+| Terraform | Infrastructure provisioning |
+| Ansible | Server configuration and deployment |
+
+---
+
+# Technologies Used
+
+- AWS EC2
+- AWS VPC
+- AWS IAM
+- AWS Security Groups
+- Terraform
+- Ansible
+- MongoDB
+- Node.js
+- Express.js
+- React.js
+- Git
+- GitHub
+
+---
+
+# Project Structure
+
+```text
 mern-devops-assignment/
 │
 ├── terraform/
@@ -83,137 +103,259 @@ mern-devops-assignment/
 │
 ├── README.md
 └── .gitignore
-Infrastructure Provisioning using Terraform
-Resources Created
-Networking
-VPC
-Public Subnet
-Private Subnet
-Internet Gateway
-NAT Gateway
-Route Tables
-Route Table Associations
-Compute
-Web Server EC2 Instance
-Database Server EC2 Instance
-Security
-Web Security Group
-Database Security Group
-Identity and Access
-IAM Roles
-IAM Instance Profiles
-Terraform Workflow
-Initialize Terraform
+```
+
+---
+
+# Infrastructure Provisioning with Terraform
+
+The following AWS resources were created using Terraform:
+
+## Networking
+
+- VPC
+- Public Subnet
+- Private Subnet
+- Internet Gateway
+- NAT Gateway
+- Route Tables
+- Route Table Associations
+
+## Compute Resources
+
+- Web Server EC2 Instance
+- Database Server EC2 Instance
+
+## Security
+
+- Security Groups for Web Server
+- Security Groups for Database Server
+
+## Identity Management
+
+- IAM Roles
+- IAM Instance Profiles
+
+---
+
+# Terraform Workflow
+
+Initialize Terraform:
+
+```bash
 terraform init
-Validate Configuration
+```
+
+Validate Configuration:
+
+```bash
 terraform validate
-Preview Changes
+```
+
+Preview Infrastructure:
+
+```bash
 terraform plan
-Create Infrastructure
+```
+
+Deploy Infrastructure:
+
+```bash
 terraform apply
-Destroy Infrastructure
+```
+
+Destroy Infrastructure:
+
+```bash
 terraform destroy
-Configuration Management using Ansible
-Web Server Configuration
+```
+
+---
+
+# Configuration Management with Ansible
+
+## Web Server Configuration
 
 The Ansible playbook performs the following tasks:
 
-Updates package repositories
-Installs Git
-Installs Node.js
-Installs npm
-Installs PM2
-Clones TravelMemory repository
-Installs backend dependencies
-Installs frontend dependencies
-Starts application services
-Database Server Configuration
+- Updates package repositories
+- Installs Git
+- Installs Node.js
+- Installs npm
+- Installs PM2
+- Clones the TravelMemory repository
+- Installs backend dependencies
+- Installs frontend dependencies
+- Configures environment variables
+- Starts the application
 
-The database playbook performs the following tasks:
+## Database Server Configuration
 
-Installs MongoDB
-Starts MongoDB Service
-Enables MongoDB on Boot
-Configures MongoDB Authentication
-Creates Database User
-Creates Database
-Application Deployment Process
-Clone Repository
+The Ansible playbook performs the following tasks:
+
+- Installs MongoDB
+- Starts MongoDB service
+- Enables MongoDB at boot
+- Configures MongoDB authentication
+- Creates database users
+- Creates application database
+
+---
+
+# Application Deployment
+
+## Clone Repository
+
+```bash
 git clone https://github.com/UnpredictablePrashant/TravelMemory.git
-Backend Setup
+```
+
+## Backend Setup
+
+```bash
 cd backend
 npm install
+```
 
-Create Environment File
+Create a `.env` file:
 
+```env
 MONGO_URL=mongodb://traveluser:password123@PRIVATE_DB_IP:27017/travelmemory
-
 PORT=5000
+```
 
-Start Backend
+Start Backend Service:
 
+```bash
 pm2 start index.js
-Frontend Setup
+```
+
+## Frontend Setup
+
+```bash
 cd frontend
 npm install
 npm start
-Security Implementation
+```
+
+---
+
+# Security Implementation
 
 The following security measures were implemented:
 
-Network Security
-Web Server placed in Public Subnet
-MongoDB Server placed in Private Subnet
-MongoDB accessible only from Web Server Security Group
-SSH Security
-SSH access restricted to my public IP
-SSH key-based authentication used
-Root login disabled
-Firewall Rules
+## Network Security
 
-Allowed Ports:
+- Web Server deployed in Public Subnet
+- MongoDB deployed in Private Subnet
+- MongoDB accessible only from Web Server Security Group
 
-Port	Purpose
-22	SSH
-3000	React Application
-5000	Node.js Backend
-27017	MongoDB (Internal Only)
-Additional Hardening
-Disabled Password Authentication
-Enabled UFW Firewall
-Restricted MongoDB Access
-Stored Secrets in Environment Variables
-Application Communication Flow
-User accesses React Frontend through browser.
-React Frontend sends API requests to Node.js Backend.
-Node.js Backend processes requests.
-Backend communicates with MongoDB Database.
-MongoDB returns data.
-Backend sends response to Frontend.
-Frontend displays data to user.
-Screenshots
-Terraform Infrastructure Creation
+## SSH Security
 
+- SSH access restricted to my public IP address
+- SSH key-based authentication enabled
+- Root login disabled
 
-Challenges Faced
-Understanding AWS networking concepts such as VPC, subnets, route tables, and NAT Gateway.
-Configuring secure communication between Web Server and Database Server.
-Installing and configuring MongoDB in a private subnet.
-Managing environment variables for backend connectivity.
-Configuring Ansible inventory and SSH access.
-Learning Outcomes
+## Firewall Rules
+
+| Port | Purpose |
+|--------|---------|
+| 22 | SSH Access |
+| 3000 | React Frontend |
+| 5000 | Node.js Backend |
+| 27017 | MongoDB (Internal Access Only) |
+
+## Additional Hardening
+
+- Disabled Password Authentication
+- Configured UFW Firewall
+- Restricted MongoDB Access
+- Stored secrets in environment variables
+
+---
+
+# Application Workflow
+
+1. User accesses the React frontend through a browser.
+2. React frontend sends API requests to the Node.js backend.
+3. Node.js backend processes requests.
+4. Backend communicates with MongoDB.
+5. MongoDB returns data.
+6. Backend sends the response back to the frontend.
+7. Frontend displays the data to the user.
+
+---
+
+# Screenshots
+
+## Terraform Apply
+
+![Terraform Apply](screenshots/terraform-apply.png)
+
+## AWS VPC
+
+![VPC](screenshots/vpc.png)
+
+## EC2 Instances
+
+![EC2 Instances](screenshots/ec2-instances.png)
+
+## Security Groups
+
+![Security Groups](screenshots/security-groups.png)
+
+## MongoDB Running
+
+![MongoDB Running](screenshots/mongodb-running.png)
+
+## Application Running
+
+![Application Running](screenshots/application-running.png)
+
+---
+
+# Challenges Faced
+
+- Understanding AWS networking concepts such as VPC, subnets, route tables, and NAT Gateway.
+- Configuring secure communication between the web server and database server.
+- Installing and configuring MongoDB in a private subnet.
+- Managing environment variables for backend connectivity.
+- Configuring Ansible inventory and SSH access.
+
+---
+
+# Learning Outcomes
 
 Through this project, I learned:
 
-Infrastructure as Code using Terraform.
-AWS VPC and Networking.
-EC2 provisioning and management.
-Configuration management using Ansible.
-Secure deployment of MERN applications.
-MongoDB administration.
-Security hardening techniques.
-GitHub project management and documentation.
+- Infrastructure as Code using Terraform
+- AWS Networking and VPC Design
+- EC2 Provisioning and Management
+- Configuration Management using Ansible
+- Secure Deployment of MERN Applications
+- MongoDB Administration
+- Security Hardening Techniques
+- Git and GitHub Workflow
 
+---
+
+# Conclusion
+
+This project successfully demonstrates the deployment of a MERN stack application on AWS using Terraform for infrastructure provisioning and Ansible for configuration management. The deployment follows security best practices by isolating the database in a private subnet and restricting access using security groups and SSH key authentication.
+
+---
+
+# Author
+
+**Name:** Your Name
+
+**USN:** Your USN
+
+**Course:** DevOps / Cloud Computing
+
+**Assignment:** MERN Stack Deployment on AWS using Terraform and Ansible
+
+**GitHub Repository:** https://github.com/yourusername/mern-devops-assignment
 "Screenshots"
 <img width="940" height="132" alt="image" src="https://github.com/user-attachments/assets/b8fcd771-2a98-43a1-afe3-1ed0af45be8e" />
 
