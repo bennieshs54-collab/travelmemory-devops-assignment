@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Travel Memory
 
 `.env` file to work with the backend after creating a database in mongodb: 
@@ -30,3 +31,7 @@ For frontend, you need to create `.env` file and put the following content (reme
 ```bash
 REACT_APP_BACKEND_URL=http://localhost:3001
 ```
+=======
+# travelmemory-devops-assignment
+travelmemory-devops-assignment
+>>>>>>> 2fc2a93b0e89cd766b9f3135fb0cad16179e9a9e
